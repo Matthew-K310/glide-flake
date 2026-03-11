@@ -1,6 +1,6 @@
 #+title: glide-flake
 
-A nix flake for [glide](https://github.com/glide-browser/glide), an extensible and keyboard focused web browser.
+A nix flake for [[https://github.com/glide-browser/glide][glide]], an extensible and keyboard focused web browser.
 
 ** Usage
 
