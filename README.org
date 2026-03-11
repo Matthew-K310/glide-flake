@@ -1,0 +1,62 @@
+#+title: glide-flake
+
+A nix flake for [glide](https://github.com/glide-browser/glide), an extensible and keyboard focused web browser.
+
+** Usage
+
+*** Run directly
+
+#+begin_src shell
+nix run codeberg:Matthew-K310/glide-flake
+#+end_src
+
+*** Install to profile
+
+#+begin_src shell
+nix profile install github:Matthew-K310/glide-flake
+#+end_src
+
+*** Add to NixOS configuration
+
+#+begin_src nix
+{
+  inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    glide = {
+      url = "github:Matthew-K310/glide-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
+
+  outputs = inputs: {
+    nixosConfigurations.yourhost = inputs.nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      modules = [
+        {
+          environment.systemPackages = [
+            inputs.glide.packages.x86_64-linux.default
+          ];
+        }
+      ];
+    };
+  };
+}
+#+end_src
+
+*** Build locally
+
+#+begin_src shell
+git clone https://github.com/Matthew-K310/glide-flake.git
+cd glide-flake
+nix build
+./result/bin/glide
+#+end_src
+
+** Supported Platforms
+
+- x86_64-linux
+- aarch64-linux
+
+** License
+
+GPL-3.0
